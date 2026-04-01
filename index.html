@@ -58,28 +58,30 @@
       }
     </style>
   </head>
-  <body class="p-6 h-screen flex flex-col">
+  <body class="p-4 lg:p-6 min-h-screen lg:h-screen flex flex-col">
     <header
-      class="mb-6 border-b border-slate-700 pb-4 flex justify-between items-end"
+      class="mb-6 border-b border-slate-700 pb-4 flex flex-col md:flex-row justify-between md:items-end gap-4 md:gap-0"
     >
       <div>
-        <h1 class="text-2xl font-bold text-blue-400">
+        <h1 class="text-xl md:text-2xl font-bold text-blue-400">
           CMOS Inverter Characteristics Simulator
         </h1>
         <p class="text-slate-400 text-sm">
           Interactive Load Line, VTC, and Short-Circuit Power Analysis
         </p>
       </div>
-      <div class="text-right text-slate-300 text-sm">
+      <div class="text-left md:text-right text-slate-300 text-sm">
         <p class="font-semibold text-blue-300">Sharaf Makahleh</p>
         <p>Professor: Abdel Rauf Rjoub</p>
         <p>Course: Digital Integrated Circuits CPE421</p>
       </div>
     </header>
 
-    <div class="grid grid-cols-12 gap-6 flex-grow overflow-hidden">
+    <div
+      class="flex flex-col lg:grid lg:grid-cols-12 gap-6 flex-grow lg:overflow-hidden pb-8 lg:pb-0"
+    >
       <div
-        class="col-span-3 bg-slate-800 p-4 rounded-lg overflow-y-auto border border-slate-700"
+        class="col-span-12 lg:col-span-3 bg-slate-800 p-4 rounded-lg lg:overflow-y-auto border border-slate-700"
       >
         <h2
           class="text-lg font-semibold mb-4 text-slate-200 border-b border-slate-600 pb-2"
@@ -174,33 +176,35 @@
         </div>
       </div>
 
-      <div class="col-span-6 flex flex-col gap-4 overflow-hidden">
+      <div
+        class="col-span-12 lg:col-span-6 flex flex-col gap-4 lg:overflow-hidden order-1 lg:order-none"
+      >
         <div
-          class="bg-slate-800 p-4 rounded-lg border border-slate-700 flex-1 relative"
+          class="bg-slate-800 p-4 rounded-lg border border-slate-700 flex-1 relative min-h-[300px] lg:min-h-0"
         >
           <h3
-            class="text-sm font-semibold text-slate-300 absolute top-2 left-4"
+            class="text-sm font-semibold text-slate-300 absolute top-2 left-4 z-10 bg-slate-800 bg-opacity-75 px-1 rounded"
           >
             Voltage Transfer Characteristic (VTC)
           </h3>
           <canvas id="vtcChart"></canvas>
         </div>
-        <div class="flex gap-4 flex-1">
+        <div class="flex flex-col md:flex-row gap-4 flex-1">
           <div
-            class="bg-slate-800 p-4 rounded-lg border border-slate-700 flex-1 relative"
+            class="bg-slate-800 p-4 rounded-lg border border-slate-700 flex-1 relative min-h-[250px] lg:min-h-0"
           >
             <h3
-              class="text-sm font-semibold text-slate-300 absolute top-2 left-4"
+              class="text-sm font-semibold text-slate-300 absolute top-2 left-4 z-10 bg-slate-800 bg-opacity-75 px-1 rounded"
             >
               Load Line Analysis
             </h3>
             <canvas id="loadLineChart"></canvas>
           </div>
           <div
-            class="bg-slate-800 p-4 rounded-lg border border-slate-700 flex-1 relative"
+            class="bg-slate-800 p-4 rounded-lg border border-slate-700 flex-1 relative min-h-[250px] lg:min-h-0"
           >
             <h3
-              class="text-sm font-semibold text-slate-300 absolute top-2 left-4"
+              class="text-sm font-semibold text-slate-300 absolute top-2 left-4 z-10 bg-slate-800 bg-opacity-75 px-1 rounded"
             >
               Short-Circuit Current (Ids)
             </h3>
@@ -210,7 +214,7 @@
       </div>
 
       <div
-        class="col-span-3 bg-slate-800 p-4 rounded-lg flex flex-col border border-slate-700"
+        class="col-span-12 lg:col-span-3 bg-slate-800 p-4 rounded-lg flex flex-col border border-slate-700 order-3 lg:order-none"
       >
         <div class="bg-slate-900 border border-slate-600 rounded p-4 mb-6">
           <h3 class="text-sm font-bold text-slate-300 mb-2">
@@ -230,9 +234,14 @@
         </div>
 
         <div
-          class="flex-grow flex flex-col items-center justify-center bg-slate-900 rounded border border-slate-700 p-4"
+          class="flex-grow flex flex-col items-center justify-center bg-slate-900 rounded border border-slate-700 p-4 py-8 lg:py-4 min-h-[300px] lg:min-h-0"
         >
-          <svg width="180" height="280" viewBox="0 0 120 220">
+          <svg
+            width="180"
+            height="280"
+            viewBox="0 0 120 220"
+            class="max-w-full h-auto"
+          >
             <!-- VDD -->
             <line x1="40" y1="15" x2="80" y2="15" class="wire" />
             <text x="50" y="10" fill="#ef4444" font-weight="bold">VDD</text>
@@ -241,18 +250,48 @@
             <!-- pMOS -->
             <!-- Source/Drain connections to channel -->
             <line x1="60" y1="45" x2="50" y2="45" class="wire" />
-            <line id="pmos_channel" x1="50" y1="45" x2="50" y2="85" class="wire" />
+            <line
+              id="pmos_channel"
+              x1="50"
+              y1="45"
+              x2="50"
+              y2="85"
+              class="wire"
+            />
             <line x1="50" y1="85" x2="60" y2="85" class="wire" />
             <!-- Gate -->
             <line x1="42" y1="45" x2="42" y2="85" class="wire" />
-            <circle cx="37" cy="65" r="4" stroke="#475569" stroke-width="2" fill="#0f172a" class="wire pmos-gate" />
+            <circle
+              cx="37"
+              cy="65"
+              r="4"
+              stroke="#475569"
+              stroke-width="2"
+              fill="#0f172a"
+              class="wire pmos-gate"
+            />
             <line x1="20" y1="65" x2="33" y2="65" class="wire" />
-            <text id="lbl_pmos_state" x="70" y="68" fill="#94a3b8" font-size="10">OFF</text>
+            <text
+              id="lbl_pmos_state"
+              x="70"
+              y="68"
+              fill="#94a3b8"
+              font-size="10"
+            >
+              OFF
+            </text>
 
             <!-- Mid wire (Vout connection) -->
             <line id="wire_mid" x1="60" y1="85" x2="60" y2="125" class="wire" />
-            
-            <line id="wire_out" x1="60" y1="105" x2="105" y2="105" class="wire" />
+
+            <line
+              id="wire_out"
+              x1="60"
+              y1="105"
+              x2="105"
+              y2="105"
+              class="wire"
+            />
             <circle cx="60" cy="105" r="3" fill="#3b82f6" />
             <text x="85" y="98" fill="#3b82f6" font-weight="bold">Vout</text>
             <text id="lbl_vout" x="80" y="120" fill="#3b82f6">5.0V</text>
@@ -260,12 +299,27 @@
             <!-- nMOS -->
             <!-- Source/Drain connections to channel -->
             <line x1="60" y1="125" x2="50" y2="125" class="wire" />
-            <line id="nmos_channel" x1="50" y1="125" x2="50" y2="165" class="wire" />
+            <line
+              id="nmos_channel"
+              x1="50"
+              y1="125"
+              x2="50"
+              y2="165"
+              class="wire"
+            />
             <line x1="50" y1="165" x2="60" y2="165" class="wire" />
             <!-- Gate -->
             <line x1="42" y1="125" x2="42" y2="165" class="wire" />
             <line x1="20" y1="145" x2="42" y2="145" class="wire" />
-            <text id="lbl_nmos_state" x="70" y="148" fill="#94a3b8" font-size="10">OFF</text>
+            <text
+              id="lbl_nmos_state"
+              x="70"
+              y="148"
+              fill="#94a3b8"
+              font-size="10"
+            >
+              OFF
+            </text>
 
             <!-- Vin connection -->
             <line x1="20" y1="65" x2="20" y2="145" class="wire" />
@@ -274,15 +328,28 @@
             <text x="0" y="98" fill="#eab308" font-weight="bold">Vin</text>
 
             <!-- GND -->
-            <line id="wire_gnd" x1="60" y1="165" x2="60" y2="195" class="wire" />
-            <path d="M 45 195 L 75 195 L 60 215 Z" fill="none" stroke="#475569" stroke-width="2" class="wire gnd-symbol" />
+            <line
+              id="wire_gnd"
+              x1="60"
+              y1="165"
+              x2="60"
+              y2="195"
+              class="wire"
+            />
+            <path
+              d="M 45 195 L 75 195 L 60 215 Z"
+              fill="none"
+              stroke="#475569"
+              stroke-width="2"
+              class="wire gnd-symbol"
+            />
             <text x="80" y="210" fill="#22c55e" font-weight="bold">GND</text>
           </svg>
         </div>
 
         <div
           id="math_panel"
-          class="mt-4 bg-slate-900 border border-slate-600 rounded p-4 h-48 overflow-y-auto"
+          class="mt-4 bg-slate-900 border border-slate-600 rounded p-4 lg:h-48 overflow-y-auto"
         >
           <h3
             class="text-sm font-bold text-slate-300 mb-1 border-b border-slate-700 pb-1"
@@ -482,17 +549,60 @@
               x: { title: { display: true, text: 'Vin (V)' }, min: 0 },
               y: { title: { display: true, text: 'Vout (V)' }, min: 0 },
             },
-            plugins: { 
+            plugins: {
               legend: { display: false },
               annotation: {
                 annotations: {
-                  boxA: { type: 'box', xMin: 0, xMax: 0, backgroundColor: 'rgba(59, 130, 246, 0.1)', borderWidth: 0, label: { display: true, content: 'A', position: 'start' } },
-                  boxB: { type: 'box', xMin: 0, xMax: 0, backgroundColor: 'rgba(234, 179, 8, 0.1)', borderWidth: 0, label: { display: true, content: 'B', position: 'start' } },
-                  boxD: { type: 'box', xMin: 0, xMax: 0, backgroundColor: 'rgba(239, 68, 68, 0.1)', borderWidth: 0, label: { display: true, content: 'D', position: 'start' } },
-                  boxE: { type: 'box', xMin: 0, xMax: 0, backgroundColor: 'rgba(34, 197, 94, 0.1)', borderWidth: 0, label: { display: true, content: 'E', position: 'start' } },
-                  lineC: { type: 'line', xMin: 0, xMax: 0, yMin: 0, yMax: 5, borderColor: '#f8fafc', borderDash: [5, 5], borderWidth: 1, label: { display: true, content: 'C', position: 'start', backgroundColor: 'rgba(0,0,0,0)' } }
-                }
-              }
+                  boxA: {
+                    type: 'box',
+                    xMin: 0,
+                    xMax: 0,
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 0,
+                    label: { display: true, content: 'A', position: 'start' },
+                  },
+                  boxB: {
+                    type: 'box',
+                    xMin: 0,
+                    xMax: 0,
+                    backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                    borderWidth: 0,
+                    label: { display: true, content: 'B', position: 'start' },
+                  },
+                  boxD: {
+                    type: 'box',
+                    xMin: 0,
+                    xMax: 0,
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    borderWidth: 0,
+                    label: { display: true, content: 'D', position: 'start' },
+                  },
+                  boxE: {
+                    type: 'box',
+                    xMin: 0,
+                    xMax: 0,
+                    backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                    borderWidth: 0,
+                    label: { display: true, content: 'E', position: 'start' },
+                  },
+                  lineC: {
+                    type: 'line',
+                    xMin: 0,
+                    xMax: 0,
+                    yMin: 0,
+                    yMax: 5,
+                    borderColor: '#f8fafc',
+                    borderDash: [5, 5],
+                    borderWidth: 1,
+                    label: {
+                      display: true,
+                      content: 'C',
+                      position: 'start',
+                      backgroundColor: 'rgba(0,0,0,0)',
+                    },
+                  },
+                },
+              },
             },
             animation: false,
           },
@@ -583,11 +693,16 @@
 
         // Update regions
         const ann = chartVTC.options.plugins.annotation.annotations;
-        ann.boxA.xMin = 0; ann.boxA.xMax = vtn;
-        ann.boxB.xMin = vtn; ann.boxB.xMax = Vm;
-        ann.boxD.xMin = Vm; ann.boxD.xMax = vdd + vtp;
-        ann.boxE.xMin = vdd + vtp; ann.boxE.xMax = vdd;
-        ann.lineC.xMin = Vm; ann.lineC.xMax = Vm;
+        ann.boxA.xMin = 0;
+        ann.boxA.xMax = vtn;
+        ann.boxB.xMin = vtn;
+        ann.boxB.xMax = Vm;
+        ann.boxD.xMin = Vm;
+        ann.boxD.xMax = vdd + vtp;
+        ann.boxE.xMin = vdd + vtp;
+        ann.boxE.xMax = vdd;
+        ann.lineC.xMin = Vm;
+        ann.lineC.xMax = Vm;
 
         chartVTC.data.datasets[0].data = vtcData;
         chartVTC.options.scales.x.max = vdd;
